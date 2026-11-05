@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core_theme.dart';
-import 'detalle_producto_screen.dart';
 import 'favoritos_provider.dart';
 import 'producto_card.dart';
 import 'producto_model.dart';
+import 'producto_repository.dart';
 
 /// Pantalla principal: catalogo con busqueda por nombre y filtro por categoria.
 class CatalogoScreen extends StatefulWidget {
@@ -16,15 +16,16 @@ class CatalogoScreen extends StatefulWidget {
 }
 
 class _CatalogoScreenState extends State<CatalogoScreen> {
+  final ProductoRepository _repo = ProductoRepository();
   String _busqueda = '';
   String _categoria = 'Todas';
 
   List<Producto> get _productosFiltrados {
-    return listaProductos
+    return _repo
+        .obtenerProductos()
         .where(
-          (p) => p.nombre.toLowerCase().contains(
-            _busqueda.toLowerCase().trim(),
-          ),
+          (p) =>
+              p.nombre.toLowerCase().contains(_busqueda.toLowerCase().trim()),
         )
         .where((p) => _categoria == 'Todas' || p.categoria == _categoria)
         .toList();
@@ -45,6 +46,13 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
       ),
       onSelected: (_) => setState(() => _categoria = texto),
     );
+  }
+
+  // Abre el formulario y, al volver, refresca la lista para ver el nuevo
+  Future<void> _abrirFormulario() async {
+    await Navigator.pushNamed(context, '/nuevo');
+    if (!mounted) return;
+    setState(() {});
   }
 
   @override
@@ -70,6 +78,13 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _abrirFormulario,
+        backgroundColor: AppColors.acento,
+        foregroundColor: Colors.white,
+        icon: const Icon(Icons.add),
+        label: const Text('Publicar'),
+      ),
       body: Column(
         children: [
           // Barra de busqueda
@@ -92,7 +107,8 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
               itemCount: categorias.length,
               separatorBuilder: (context, index) =>
                   const SizedBox(width: AppSpacing.sm),
-              itemBuilder: (context, index) => _chipCategoria(categorias[index]),
+              itemBuilder: (context, index) =>
+                  _chipCategoria(categorias[index]),
             ),
           ),
           // Resultados
@@ -100,7 +116,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
             child: productos.isEmpty
                 ? const Center(child: Text('No se encontraron artículos'))
                 : GridView.builder(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 88),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -114,12 +130,11 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                       return ProductoCard(
                         producto: producto,
                         onTap: () {
-                          Navigator.push(
+                          // Se manda el producto como argumento de la ruta
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DetalleProductoScreen(producto: producto),
-                            ),
+                            '/detalle',
+                            arguments: producto,
                           );
                         },
                       );

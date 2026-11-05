@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'catalogo_screen.dart';
 import 'core_theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,10 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const CatalogoScreen()),
-      );
+      Navigator.pushReplacementNamed(context, '/catalogo');
     });
   }
 

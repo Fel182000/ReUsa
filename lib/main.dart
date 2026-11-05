@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'catalogo_screen.dart';
 import 'core_theme.dart';
+import 'detalle_producto_screen.dart';
 import 'favoritos_provider.dart';
+import 'formulario_producto_screen.dart';
 import 'splash_screen.dart';
 
 void main() {
@@ -23,7 +26,13 @@ class ReusaApp extends StatelessWidget {
       title: 'ReUsa Tolcayuca',
       debugShowCheckedModeBanner: false,
       theme: buildReusaTheme(),
-      home: const SplashScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/catalogo': (context) => const CatalogoScreen(),
+        '/detalle': (context) => const DetalleProductoScreen(),
+        '/nuevo': (context) => const FormularioProductoScreen(),
+      },
     );
   }
 }
