@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core_theme.dart';
+import 'custom_button.dart';
 import 'favoritos_provider.dart';
 import 'producto_model.dart';
 
@@ -111,7 +112,7 @@ class DetalleProductoScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: AppSpacing.lg),
-              ElevatedButton.icon(
+              CustomButton(
                 onPressed: () {
                   context.read<FavoritosProvider>().alternar(producto.id);
                   _aviso(
@@ -121,16 +122,15 @@ class DetalleProductoScreen extends StatelessWidget {
                         : '${producto.nombre} guardado en favoritos',
                   );
                 },
-                icon: Icon(esFavorito ? Icons.favorite : Icons.favorite_border),
-                label: Text(
-                  esFavorito ? 'En favoritos' : 'Guardar en favoritos',
-                ),
+                icono: esFavorito ? Icons.favorite : Icons.favorite_border,
+                texto: esFavorito ? 'En favoritos' : 'Guardar en favoritos',
               ),
               const SizedBox(height: AppSpacing.sm),
-              OutlinedButton.icon(
+              CustomButton(
+                secundario: true,
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('Volver al catálogo'),
+                icono: Icons.arrow_back,
+                texto: 'Volver al catálogo',
               ),
             ],
           ),
