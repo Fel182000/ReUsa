@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'catalogo_screen.dart';
+import 'consejos_screen.dart';
 import 'core_theme.dart';
 import 'detalle_producto_screen.dart';
 import 'favoritos_provider.dart';
+import 'favoritos_screen.dart';
 import 'formulario_producto_screen.dart';
 import 'splash_screen.dart';
 
@@ -32,6 +34,8 @@ class ReusaApp extends StatelessWidget {
         '/catalogo': (context) => const CatalogoScreen(),
         '/detalle': (context) => const DetalleProductoScreen(),
         '/nuevo': (context) => const FormularioProductoScreen(),
+        '/favoritos': (context) => const FavoritosScreen(),
+        '/consejos': (context) => const ConsejosScreen(),
       },
     );
   }

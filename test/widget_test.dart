@@ -1,30 +1,40 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:reusa/main.dart';
+import 'package:reusa/custom_button.dart';
+import 'package:reusa/favoritos_provider.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test('FavoritosProvider agrega y quita favoritos', () {
+    final provider = FavoritosProvider();
+    expect(provider.cantidad, 0);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    provider.alternar(1);
+    expect(provider.esFavorito(1), true);
+    expect(provider.cantidad, 1);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    provider.alternar(1);
+    expect(provider.esFavorito(1), false);
+    expect(provider.cantidad, 0);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('CustomButton responde al toque', (tester) async {
+    var toques = 0;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: CustomButton(
+            texto: 'Guardar',
+            icono: Icons.favorite,
+            onPressed: () => toques++,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Guardar'), findsOneWidget);
+
+    await tester.tap(find.text('Guardar'));
+    expect(toques, 1);
   });
 }

@@ -67,12 +67,20 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
+          IconButton(
+            tooltip: 'Consejos',
+            icon: const Icon(Icons.eco_outlined),
+            onPressed: () => Navigator.pushNamed(context, '/consejos'),
+          ),
           Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Center(
-              child: Text(
-                '❤ $favoritos',
-                style: const TextStyle(fontSize: 18, color: Colors.white),
+            padding: const EdgeInsets.only(right: 8),
+            child: Badge(
+              isLabelVisible: favoritos > 0,
+              label: Text('$favoritos'),
+              child: IconButton(
+                tooltip: 'Favoritos',
+                icon: const Icon(Icons.favorite_border),
+                onPressed: () => Navigator.pushNamed(context, '/favoritos'),
               ),
             ),
           ),
