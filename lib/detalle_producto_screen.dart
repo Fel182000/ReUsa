@@ -6,13 +6,14 @@ import 'favoritos_provider.dart';
 import 'producto_model.dart';
 
 /// Pantalla de detalle de un articulo: imagen, datos y boton de favoritos.
+/// El producto llega como argumento de la ruta '/detalle'.
 class DetalleProductoScreen extends StatelessWidget {
-  final Producto producto;
-
-  const DetalleProductoScreen({super.key, required this.producto});
+  const DetalleProductoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Aqui se lee el paquete que mando pushNamed(..., arguments: producto)
+    final producto = ModalRoute.of(context)!.settings.arguments as Producto;
     final esFavorito = context.watch<FavoritosProvider>().esFavorito(
       producto.id,
     );
@@ -88,6 +89,27 @@ class DetalleProductoScreen extends StatelessWidget {
                   color: AppColors.textoPrincipal,
                 ),
               ),
+              const SizedBox(height: AppSpacing.md),
+              // Contacto del vendedor
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.contact_phone_outlined,
+                    size: 18,
+                    color: AppColors.primario,
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
+                    producto.contacto,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primario,
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: AppSpacing.lg),
               ElevatedButton.icon(
                 onPressed: () {
@@ -100,7 +122,9 @@ class DetalleProductoScreen extends StatelessWidget {
                   );
                 },
                 icon: Icon(esFavorito ? Icons.favorite : Icons.favorite_border),
-                label: Text(esFavorito ? 'En favoritos' : 'Guardar en favoritos'),
+                label: Text(
+                  esFavorito ? 'En favoritos' : 'Guardar en favoritos',
+                ),
               ),
               const SizedBox(height: AppSpacing.sm),
               OutlinedButton.icon(
