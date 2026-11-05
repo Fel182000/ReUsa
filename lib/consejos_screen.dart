@@ -56,7 +56,6 @@ const List<_Consejo> _reciclar = [
   ),
 ];
 
-/// Pantalla estatica con consejos para reutilizar y reciclar.
 class ConsejosScreen extends StatelessWidget {
   const ConsejosScreen({super.key});
 

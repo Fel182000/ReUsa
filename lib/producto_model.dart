@@ -5,10 +5,10 @@ class Producto {
   final String nombre;
   final double precio;
   final String categoria;
-  final String estado; // 'Como nuevo', 'Buen estado' o 'Usado'
+  final String estado;
   final String descripcion;
-  final String zona; // zona de Tolcayuca para el contacto
-  final String contacto; // telefono de 10 digitos o correo
+  final String zona;
+  final String contacto;
   final String rutaImagen;
 
   const Producto({
@@ -26,7 +26,6 @@ class Producto {
   String get precioTexto => '\$${precio.toStringAsFixed(2)}';
 }
 
-/// Categorias permitidas. 'Todas' no es una categoria real: muestra todo.
 const List<String> categorias = [
   'Todas',
   'Ropa',
@@ -35,10 +34,8 @@ const List<String> categorias = [
   'Hogar',
 ];
 
-/// Estados permitidos del articulo.
 const List<String> estados = ['Como nuevo', 'Buen estado', 'Usado'];
 
-/// Icono de respaldo cuando la imagen del producto no carga.
 IconData iconoDeCategoria(String categoria) {
   switch (categoria) {
     case 'Ropa':

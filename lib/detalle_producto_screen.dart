@@ -6,14 +6,11 @@ import 'custom_button.dart';
 import 'favoritos_provider.dart';
 import 'producto_model.dart';
 
-/// Pantalla de detalle de un articulo: imagen, datos y boton de favoritos.
-/// El producto llega como argumento de la ruta '/detalle'.
 class DetalleProductoScreen extends StatelessWidget {
   const DetalleProductoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Aqui se lee el paquete que mando pushNamed(..., arguments: producto)
     final producto = ModalRoute.of(context)!.settings.arguments as Producto;
     final esFavorito = context.watch<FavoritosProvider>().esFavorito(
       producto.id,
@@ -91,7 +88,6 @@ class DetalleProductoScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
-              // Contacto del vendedor
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

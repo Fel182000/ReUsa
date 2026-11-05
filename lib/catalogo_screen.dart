@@ -7,7 +7,6 @@ import 'producto_card.dart';
 import 'producto_model.dart';
 import 'producto_repository.dart';
 
-/// Pantalla principal: catalogo con busqueda por nombre y filtro por categoria.
 class CatalogoScreen extends StatefulWidget {
   const CatalogoScreen({super.key});
 
@@ -48,7 +47,6 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
     );
   }
 
-  // Abre el formulario y, al volver, refresca la lista para ver el nuevo
   Future<void> _abrirFormulario() async {
     await Navigator.pushNamed(context, '/nuevo');
     if (!mounted) return;
@@ -95,7 +93,6 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
       ),
       body: Column(
         children: [
-          // Barra de busqueda
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: TextField(
@@ -106,7 +103,6 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
               ),
             ),
           ),
-          // Filtros de categoria (scroll horizontal)
           SizedBox(
             height: 48,
             child: ListView.separated(
@@ -119,7 +115,6 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                   _chipCategoria(categorias[index]),
             ),
           ),
-          // Resultados
           Expanded(
             child: productos.isEmpty
                 ? const Center(child: Text('No se encontraron artículos'))
@@ -138,7 +133,6 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                       return ProductoCard(
                         producto: producto,
                         onTap: () {
-                          // Se manda el producto como argumento de la ruta
                           Navigator.pushNamed(
                             context,
                             '/detalle',

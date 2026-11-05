@@ -1,7 +1,6 @@
 import 'producto_model.dart';
 
 class ProductoRepository {
-  // static: todas las pantallas comparten la misma lista
   static final List<Producto> _productos = [
     const Producto(
       id: 1,
@@ -100,13 +99,11 @@ class ProductoRepository {
     return _productos;
   }
 
-  // Calcula el siguiente id: el mayor que exista + 1
   int siguienteId() {
     if (_productos.isEmpty) return 1;
     return _productos.map((p) => p.id).reduce((a, b) => a > b ? a : b) + 1;
   }
 
-  // El nuevo producto se pone al inicio para verlo primero
   void agregar(Producto producto) {
     _productos.insert(0, producto);
   }

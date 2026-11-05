@@ -1,3 +1,13 @@
+Proyecto de Venta-Compra de artículos de segunda mano que llamamos "ReUsa", en el
+que un usuario puede checar el catálogo de los artículos que la gente ha
+publicado, checar los detalles, y si el artículo es de su agrado puede seleccionar
+como favorito.
+
+Integrantes del proyecto:
+- Bautista Navarrete Rodrigo Rafael
+- Cruz Robles Joaquín Ángel
+- Ramos Gómez Felipe
+
 # reusa
 
 A new Flutter project.

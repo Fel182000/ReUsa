@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primario = Color(0xFF2E7D6B); // verde azulado
+  static const Color primario = Color(0xFF2E7D6B);
   static const Color primarioClaro = Color(0xFFBFE3D9);
-  static const Color acento = Color(0xFFE98A3C); // naranja terracota
+  static const Color acento = Color(0xFFE98A3C);
   static const Color textoPrincipal = Color(0xFF263238);
   static const Color textoSecundario = Color(0xFF78909C);
-  static const Color fondo = Color(0xFFFAF6EF); // crema
+  static const Color fondo = Color(0xFFFAF6EF);
   static const Color tarjeta = Colors.white;
 }
 

@@ -34,19 +34,16 @@ class _FormularioProductoScreenState extends State<FormularioProductoScreen> {
     super.dispose();
   }
 
-  // Revisa los campos. Regresa el mensaje de error o null si todo esta bien
   String? _validar() {
     final nombre = _nombreCtrl.text.trim();
     final descripcion = _descripcionCtrl.text.trim();
     final zona = _zonaCtrl.text.trim();
     final contacto = _contactoCtrl.text.trim();
 
-    // Campos obligatorios
     if (nombre.isEmpty || descripcion.isEmpty || zona.isEmpty) {
       return 'Escribe nombre, descripción y zona';
     }
 
-    // El precio debe ser un numero mayor que 0
     final precio = double.tryParse(_precioCtrl.text.trim());
     if (precio == null) {
       return 'El precio debe ser un número';
@@ -55,7 +52,6 @@ class _FormularioProductoScreenState extends State<FormularioProductoScreen> {
       return 'El precio debe ser mayor que 0';
     }
 
-    // Categoria y estado elegidos
     if (_categoria == null) {
       return 'Elige una categoría';
     }
@@ -63,7 +59,6 @@ class _FormularioProductoScreenState extends State<FormularioProductoScreen> {
       return 'Elige el estado del artículo';
     }
 
-    // Contacto: telefono de 10 digitos o correo valido
     final esTelefono = RegExp(r'^\d{10}$').hasMatch(contacto);
     final esCorreo = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(contacto);
     if (!esTelefono && !esCorreo) {
@@ -89,7 +84,6 @@ class _FormularioProductoScreenState extends State<FormularioProductoScreen> {
       descripcion: _descripcionCtrl.text.trim(),
       zona: _zonaCtrl.text.trim(),
       contacto: _contactoCtrl.text.trim(),
-      // Sin foto por ahora: se muestra el icono de la categoria
       rutaImagen: '',
     );
     _repo.agregar(producto);
@@ -100,7 +94,6 @@ class _FormularioProductoScreenState extends State<FormularioProductoScreen> {
     Navigator.pop(context);
   }
 
-  // Chip para elegir una opcion (se usa en categoria y estado)
   Widget _chipOpcion(
     String texto,
     String? elegida,
@@ -127,7 +120,6 @@ class _FormularioProductoScreenState extends State<FormularioProductoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // 'Todas' no es una categoria real, por eso se quita
     final categoriasReales = categorias.where((c) => c != 'Todas').toList();
 
     return Scaffold(

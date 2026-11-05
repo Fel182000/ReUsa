@@ -5,10 +5,6 @@ import 'core_theme.dart';
 import 'favoritos_provider.dart';
 import 'producto_model.dart';
 
-/// Tarjeta de un producto dentro del catalogo.
-///
-/// Imagen arriba con un corazon de favoritos encima, y abajo el nombre,
-/// el estado del articulo y el precio.
 class ProductoCard extends StatelessWidget {
   final Producto producto;
   final VoidCallback onTap;
@@ -109,7 +105,6 @@ class ProductoCard extends StatelessWidget {
       producto.rutaImagen,
       fit: BoxFit.cover,
       excludeFromSemantics: true,
-      // Si no hay imagen, se muestra el icono de la categoria.
       errorBuilder: (context, error, stackTrace) => ColoredBox(
         color: AppColors.primarioClaro,
         child: Center(

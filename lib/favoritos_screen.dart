@@ -7,13 +7,11 @@ import 'favoritos_provider.dart';
 import 'producto_model.dart';
 import 'producto_repository.dart';
 
-/// Lista los productos marcados como favoritos.
 class FavoritosScreen extends StatelessWidget {
   const FavoritosScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // watch: la pantalla se actualiza al quitar un favorito
     final favoritos = context.watch<FavoritosProvider>();
     final productos = ProductoRepository()
         .obtenerProductos()

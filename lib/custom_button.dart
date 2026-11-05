@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Boton reutilizable de ReUsa.
-/// Usa el estilo del tema: principal (relleno) o secundario (con borde).
 class CustomButton extends StatelessWidget {
   final String texto;
   final IconData? icono;
